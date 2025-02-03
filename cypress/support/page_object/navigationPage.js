@@ -1,0 +1,47 @@
+function openMenu(menu){
+
+    cy.get("a[title='"+menu+"']").invoke("attr","aria-expanded").then(attr=>{
+        if(attr == "false")
+            cy.contains(menu).click()
+    })
+}
+
+class NavigationPage{
+
+    goToAccordion(){
+        openMenu("Layout")
+        cy.contains("Accordion").click()
+    }
+
+    goToformLayouts(){
+        openMenu("Forms")
+        cy.contains("Form Layouts").click()
+    }
+
+    goToToastr(){
+        openMenu("Modal & Overlays")
+        cy.contains("Toastr").click()
+    }
+
+    goToTooltip(){
+        openMenu("Modal & Overlays")
+        cy.contains("Tooltip").click()
+    }
+
+    goToSmartTable(){
+        openMenu("Tables & Data")
+        cy.contains("Smart Table").click()
+    }
+
+    goToStepper(){
+        openMenu("Layout")
+        cy.contains("Stepper").click()
+    }
+
+    goToDatePicker(){
+        openMenu("Forms")
+        cy.contains("Datepicker").click()
+    }
+}
+
+export const navigationBar = new NavigationPage()
