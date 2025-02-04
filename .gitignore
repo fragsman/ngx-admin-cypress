@@ -40,3 +40,12 @@ testem.log
 # System Files
 .DS_Store
 Thumbs.db
+
+# Mochawesome report
+/mochawesome-report/*
+mochawesome.json
+
+# Test Results
+/cypress/results/junit/*
+/cypress/results/mochawesome/*
+/cypress/screenshots/*
