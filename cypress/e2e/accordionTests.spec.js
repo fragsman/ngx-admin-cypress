@@ -1,6 +1,6 @@
 /// <reference types="cypress"/>
 import { navigationBar } from "../support/page_object/navigationPage"
-import { accordionPage } from "../support/page_object/accordion/accordionPage"
+import { accordionPage } from "../support/page_object/layout/accordionPage"
 
 describe("This suite will contain tests for accordion section", ()=>{
     

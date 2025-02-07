@@ -1,8 +1,8 @@
 /// <reference types="cypress" />
 import { navigationBar } from "../support/page_object/navigationPage"
-import { topStepperSection } from "../support/page_object/stepper/topStepperSection"
-import { bottomLeftStepperSection } from "../support/page_object/stepper/bottomLeftStepperSection"
-import { bottomRightStepperSection } from "../support/page_object/stepper/bottomRightStepperSection"
+import { topStepperSection } from "../support/page_object/layout/stepper/topStepperSection"
+import { bottomLeftStepperSection } from "../support/page_object/layout/stepper/bottomLeftStepperSection"
+import { bottomRightStepperSection } from "../support/page_object/layout/stepper/bottomRightStepperSection"
 
 describe("This suite will contain Top Stepper Tests", ()=>{
 

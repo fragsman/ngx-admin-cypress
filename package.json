@@ -22,7 +22,7 @@
     "delete:reports": "del cypress\\results\\junit\\* /f /q && del mochawesome-report\\* /f /q && del cypress\\results\\mochawesome\\* /f /q || exit 0",
     "prereport": "npm run delete:reports",
     "report": "cypress run --reporter cypress-multi-reporters --reporter-options configFile=reporter-config.json",
-    "cypress:run": "npx cypress run --spec cypress/e2e/stepperTests.spec.js || exit 0",
+    "cypress:run": "npx cypress run || exit 0",
     "cypress:e2e": "npm run prereport && npm run cypress:run && npm run junit:merge && npm run mochawesome:merge"
   },
   "repository": {
