@@ -28,6 +28,11 @@ class NavigationPage{
         cy.get("a[title='List']").click()
     }
 
+    goToTabs(){
+        openMenu("Layout")
+        cy.get("a[title='Tabs']").click()
+    }
+
     goToToastr(){
         openMenu("Modal & Overlays")
         cy.contains("Toastr").click()
