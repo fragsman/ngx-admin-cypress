@@ -1,6 +1,39 @@
 ///<reference types="cypress" />
 
 import { navigationBar } from "../support/page_object/navigationPage";
+import { formInputsPage } from "../support/page_object/forms/formInputsPage";
+import { datePickerPage } from "../support/page_object/forms/datepickerPage";
+import { buttonsPage } from "../support/page_object/forms/buttonsPage";
+
+describe("Form Inputs tests", ()=>{
+    
+    beforeEach("Navigate and enter Input Page", ()=>{
+        cy.openHomePage()
+        navigationBar.goToformInputs()
+    });
+
+    it("Verify validation states input colors are correr", ()=>{
+       let expectedColors = {
+            "info": "rgb(0, 149, 255)" ,
+            "success" : "rgb(0, 214, 143)",
+            "warning" : "rgb(255, 170, 0)" ,
+            "danger" : "rgb(255, 61, 113)",
+            "primary" : "rgb(51, 102, 255)"
+        }
+
+        formInputsPage.verifyStatusesInputHaveProperBorderColor("info",expectedColors.info)
+        formInputsPage.verifyStatusesInputHaveProperBorderColor("success",expectedColors.success)
+        formInputsPage.verifyStatusesInputHaveProperBorderColor("warning",expectedColors.warning)
+        formInputsPage.verifyStatusesInputHaveProperBorderColor("danger",expectedColors.danger)
+        formInputsPage.verifyStatusesInputHaveProperBorderColor("primary",expectedColors.primary)
+    })
+
+    it("Verify disabled button is actually disabled",()=>{
+        cy.get("input[placeholder='Disabled input']").then(input =>{
+            expect(input).to.have.attr("disabled")
+        })
+    })
+})
 
 describe("Form Layout tests",()=>{
 
@@ -90,10 +123,25 @@ describe("Form Layout tests",()=>{
             //Check and uncheck will work disregarding the current status of the checkbox. Click will modify the status depending on the current one.
         });
     });
-});
+})
 
-describe("Form Inputs tests", ()=>{
+describe("Button tests", ()=>{
+    
+    beforeEach("Navigate and go to Buttons page", ()=>{
+        cy.openHomePage()
+        navigationBar.goToButtons()
+    });
 
+    it.skip("Verify on hover the button change color", ()=>{
+        //This will FAIL as Cypress can't hover as Selenium. This NPM Package can: 'cypress-real-events'
+        
+        let colorBeforeHover = "rgb(51, 102, 255)"
+        let colorAfterHover = "rgb(89, 139, 255)"
+
+        buttonsPage.verifyButtonToHaveBackgroundColor("Default Buttons","primary",colorBeforeHover)
+        buttonsPage.hoverOnButton("Default Buttons","primary")
+        buttonsPage.verifyButtonToHaveBackgroundColor("Default Buttons","primary",colorAfterHover)
+    })
 })
 
 describe("Date Picker tests", ()=>{
@@ -113,19 +161,6 @@ describe("Date Picker tests", ()=>{
         });
     });
 
-    function slideUntilFindCorrectMonthAndYear(futureDay, futureMonth, futureYear){
-        cy.get("nb-calendar-view-mode").find("button").invoke("text").then(txt =>{
-            if(!txt.includes(futureMonth) || !txt.includes(futureYear)){
-                cy.get("nb-icon[ng-reflect-icon='chevron-right-outline']").click();
-                slideUntilFindCorrectMonthAndYear(futureDay, futureMonth, futureYear)
-            }
-            else{
-                //I get all date-cells but I exclude the close month dates with not
-                cy.get("nb-calendar-day-cell").not(".bounding-month").contains(futureDay).click();
-            }
-        })
-    }
-
     it("Advancing days in a calendar", ()=>{
         let currentDate = new Date();
         currentDate.setDate(currentDate.getDate() + 370); //A high number so I probably roll to the next month and year
@@ -137,7 +172,7 @@ describe("Date Picker tests", ()=>{
         cy.contains("nb-card","Common Datepicker").find("input").then(dateInput => {
             cy.wrap(dateInput).click();
 
-            slideUntilFindCorrectMonthAndYear(futureDay, futureMonth, futureYear)
+            datePickerPage.slideUntilFindCorrectMonthAndYear(futureDay, futureMonth, futureYear)
 
             cy.wrap(dateInput).invoke("prop","value").then(dateValue =>{
                 expect(dateValue).to.eq(futureMonth+" "+futureDay+", "+currentDate.getFullYear());

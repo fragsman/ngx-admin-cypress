@@ -13,9 +13,19 @@ class NavigationPage{
         cy.contains("Accordion").click()
     }
 
+    goToButtons(){
+        openMenu("Forms")
+        cy.contains("Buttons").click()
+    }
+
     goToInfiniteList(){
         openMenu("Layout")
         cy.get("a[title='Infinite List']").click()
+    }
+
+    goToformInputs(){
+        openMenu("Forms")
+        cy.contains("Form Inputs").click()
     }
 
     goToformLayouts(){
