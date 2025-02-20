@@ -8,6 +8,11 @@ function openMenu(menu){
 
 class NavigationPage{
 
+    goToAnimatedSearches(){
+        openMenu("UI Features")
+        cy.contains("Animated Searches").click()
+    }
+
     goToAccordion(){
         openMenu("Layout")
         cy.contains("Accordion").click()
