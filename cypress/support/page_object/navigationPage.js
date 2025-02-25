@@ -23,6 +23,11 @@ class NavigationPage{
         cy.contains("Buttons").click()
     }
 
+    goToDialog(){
+        openMenu("Modal & Overlays")
+        cy.contains("Dialog").click()
+    }
+
     goToInfiniteList(){
         openMenu("Layout")
         cy.get("a[title='Infinite List']").click()
