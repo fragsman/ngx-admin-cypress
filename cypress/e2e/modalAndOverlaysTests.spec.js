@@ -16,16 +16,29 @@ describe("Toastr tests", ()=>{
 });
 
 describe("Tooltip tests", ()=>{
-    it("a ver a ver", ()=>{
+
+    beforeEach("Go to Tooltip section", ()=>{
         cy.visit("/")
         navigationBar.goToTooltip()
+    })
 
+    it("a ver a ver", ()=>{
         cy.contains("nb-card","Tooltip With Icon").then(section =>{
             cy.wrap(section).contains("Show Tooltip").click()
             cy.get("nb-tooltip").invoke("text").then(txt =>{
                 expect(txt).to.eq("This is a tooltip")
             })
         })
+    })
+
+    it("Verify tooltip pops up", ()=>{
+        cy.get("button[nbtooltipicon='home-outline']").trigger("mouseenter")
+        cy.get("nb-icon[ng-reflect-config='home-outline']").should("be.visible")
+        
+        cy.wait(1000)
+
+        cy.get("button[nbtooltipstatus='danger']").eq(0).trigger("mouseenter")
+        cy.get("nb-icon[ng-reflect-config='alert-triangle']").should("be.visible")
     })
 })
 

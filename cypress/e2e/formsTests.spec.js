@@ -133,7 +133,8 @@ describe("Button tests", ()=>{
     });
 
     it.skip("Verify on hover the button change color", ()=>{
-        //This will FAIL as Cypress can't hover as Selenium. This NPM Package can: 'cypress-real-events'
+        //This fail. Not sure why. The hover I tested in modalAndOverlaysTests and it works. I assume is a problem with CSS refresh or something weird.
+        //Manual testing: when I hover the button it changes to a second color for half a second and then to the final color which is represented by my colorAfterHover.
         
         let colorBeforeHover = "rgb(51, 102, 255)"
         let colorAfterHover = "rgb(89, 139, 255)"

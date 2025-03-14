@@ -28,6 +28,14 @@ class NavigationPage{
         cy.contains("Dialog").click()
     }
 
+    goToECommerce(){
+        cy.contains("E-commerce").click()
+    }
+
+    goToIODashboard(){
+        cy.contains("IoT Dashboard").click()
+    }
+
     goToInfiniteList(){
         openMenu("Layout")
         cy.get("a[title='Infinite List']").click()
